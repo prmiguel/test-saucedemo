@@ -1,0 +1,144 @@
+Test Cases
+==========
+
+Login Test Cases
+================
+
+    Functional Test Cases
+    =====================
+
+        Acceptance Test Cases
+        =====================
+
+        Title: User loggins successfully into the app
+        Description: The user can login into the application when it has the correct/valid credentials.
+        Requirements: 
+            - Access to the application
+            - Valid credentials
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/)
+            2. Enter a value in Username (E.g. standard_user)
+            3. Enter a value in Password (E.g. secret_sauce)
+            4. Click on LOGIN button
+            Note: Try with these other values
+                | Username                  | Password     |
+                | problem_user              | secret_sauce |
+                | performance_glitch_user   | secret_sauce |
+
+        Expected Result: The user should see the 'Inventory' screen.
+
+
+        ---
+        Title: User can not login into the app with wrong/invalid credentials
+        Description: The user cann't login into the application when it has the wrong/invalid credentials, or a user that doesn't exist.
+                     The username and password are casesensitive.
+        Requirements: 
+            - Access to the application
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/)
+            2. Enter a wrong/invalid value in Username (E.g. aaaaaaaa)
+            3. Enter a wrong/invalid value in Password (E.g. bbbbbbbb)
+            4. Click on LOGIN button
+            Note: Try with these other values
+                | Username      | Password       |
+                | standard_user | wrong_password |
+                | no_valid_user | secret_sauce   |
+                | STANDARD_USER | secret_sauce   |
+                | standard_user | secret_sauce   |
+
+        Expected Result: The user should see a friendly notification error "Username and password do not match any user in this service".
+
+
+        ---
+        Title: User can not login into the app if it is locked out
+        Description: The user cann't login into the application when it is locked out by the system.
+        Requirements: 
+            - Access to the application
+            - Locked user
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/)
+            2. Enter a value in Username (E.g. locked_out_user)
+            3. Enter a value in Password (E.g. secret_sauce)
+            4. Click on LOGIN button            
+
+        Expected Result: The user should see a friendly notification error "Username and password do not match any user in this service".
+
+
+
+        Negative Test Cases
+        ===================
+
+        Title: User is not able to login without username
+        Description: The user is requested to provide a username.
+        Requirements: 
+            - Access to the application
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/)
+            2. Keep Username in blank
+            3. Click on LOGIN button
+            
+        Expected Result: The user should see a friendly notification error "Username is required".
+
+
+        ---
+        Title: User is not able to login without password
+        Description: The user is requested to provide a password in order to login into the app.
+        Requirements: 
+            - Access to the application
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/)
+            2. Enter any value in Username (E.g. standard_user)
+            3. Keep Password in blank
+            4. Click on LOGIN button
+            
+        Expected Result: The user should see a friendly notification error "Password is required".
+
+
+        ---
+        Title: User needs to login before navigatiing inside the app
+        Description: The user is not able to navigate directly to the app using a saved URL, it needs to login before perform any accion inside the app.
+        Requirements: 
+            - Access to the application
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/inventory.html)
+            
+        Expected Result: The user should see a friendly notification error "You can only access when you are logged in.".
+
+
+        UI/Validation Test Cases
+        ========================
+
+        Title: User is not able to see its own password
+        Description: The user's password needs to be replaces by '*********', so anybody around is not able to see its password.
+        Requirements: 
+            - Access to the application
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/)
+            2. Enter a value in Password (E.g. secret_sauce)
+            
+        Expected Result: The user should see the password replcaed by '***********'.
+
+
+        Title: User can close the notification errors
+        Description: The user is able to clase the notification errors that appear in the screen when something is wrong/invalid in the login form.
+        Requirements: 
+            - Access to the application
+        Steps:
+            1. Open a web browser and go to the app (E.g. https://www.saucedemo.com/)
+            2. Click on LOGIN button
+            3. Click on [X] to close the notification error
+            
+        Expected Result: The user should not see the notification errors.
+
+
+    Non-Functional Test Cases
+    =========================
+
+        Performance Test Cases
+        ======================
+        TBD
+
+
+        Security Test Cases
+        ======================
+        TBD
