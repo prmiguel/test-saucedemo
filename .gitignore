@@ -21,3 +21,8 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# saucedemo-selenium-page-factory/
+
+saucedemo-selenium-page-factory/.gradle
+saucedemo-selenium-page-factory/.idea
