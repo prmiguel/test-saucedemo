@@ -95,7 +95,7 @@ Login Test Cases
 
 
         ---
-        Title: User needs to login before navigatiing inside the app
+        Title: User needs to login before navigating inside the app
         Description: The user is not able to navigate directly to the app using a saved URL, it needs to login before perform any accion inside the app.
         Requirements: 
             - Access to the application
