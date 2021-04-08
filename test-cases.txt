@@ -61,7 +61,7 @@ Login Test Cases
             3. Enter a value in Password (E.g. secret_sauce)
             4. Click on LOGIN button            
 
-        Expected Result: The user should see a friendly notification error "Username and password do not match any user in this service".
+        Expected Result: The user should see a friendly notification error "Sorry, this user has been locked out.".
 
 
 
