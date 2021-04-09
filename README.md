@@ -26,11 +26,21 @@ Run all tests:
 ```sh
 ./gradlew clean test
 ```
+> You can also set the following parameters:
+> -Dsaucedemo.web.url="<your url>"
+> -Dbrowser.name="<chrome or firefox>"
+> -Dbrowser.headless="<true or false>"
+Default values:
+- saucedemo.web.url="https://www.saucedemo.com"
+- browser.name="chrome"
+- browser.headless="true"
+
 
 ### Report
 Once the execution is clomplete, you can see the reports in `./reports` folder
 - `.\reports\gradle\test-results\test` contains Junit XML files.
 - `.\reports\gradle\tests\test\index.html` contains the HTML report.
+
 
 ### TODO
 - [ ] Move test cases to markdown file in order to improve readability.

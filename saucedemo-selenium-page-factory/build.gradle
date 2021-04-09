@@ -28,6 +28,10 @@ test {
     testResultsDirName = "$projectDir/reports/gradle/test-results"
     systemProperty "report.path", "$reporting.baseDir"
     systemProperty "screenshots.path", "$reporting.baseDir/tests/screenshots"
+
+    systemProperty "saucedemo.web.url", System.getProperty("saucedemo.web.url")
+    systemProperty "browser.name", System.getProperty("browser.name")
+    systemProperty "browser.headless", System.getProperty("browser.headless")
 }
 
 def embedFiles() {

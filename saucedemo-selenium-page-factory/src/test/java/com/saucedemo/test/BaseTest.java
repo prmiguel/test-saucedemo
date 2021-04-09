@@ -12,9 +12,13 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.concurrent.TimeUnit;
 
 
 public class BaseTest {
@@ -43,9 +47,39 @@ public class BaseTest {
 
     @Before
     public void initializeDriver() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        if (AppConfig.getBrowserName().equalsIgnoreCase("chrome"))
+            initializeChrome();
+        else if (AppConfig.getBrowserName().equalsIgnoreCase("firefox"))
+            initializeFirefox();
+        else
+            throw new RuntimeException(String.format("Browser '%s' not supported.",
+                    AppConfig.getBrowserName()));
+
         driver.get(AppConfig.getSiteURL());
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    // TODO: Move this logic to a different class
+    private void initializeFirefox() {
+        WebDriverManager.firefoxdriver().setup();
+
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+        if (AppConfig.getHeadlessMode().equalsIgnoreCase("true"))
+            firefoxOptions.setHeadless(true);
+
+        driver = new FirefoxDriver(firefoxOptions);
+    }
+
+    private void initializeChrome() {
+        WebDriverManager.chromedriver().setup();
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+
+        if (AppConfig.getHeadlessMode().equalsIgnoreCase("true"))
+            chromeOptions.setHeadless(true);
+
+        driver = new ChromeDriver(chromeOptions);
     }
 
     @After
