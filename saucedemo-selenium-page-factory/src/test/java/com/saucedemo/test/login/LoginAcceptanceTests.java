@@ -23,7 +23,7 @@ public class LoginAcceptanceTests extends BaseTest {
         this.password = password;
     }
 
-    @Parameterized.Parameters(name = "{index}: with username={0}, password={1}")
+    @Parameterized.Parameters(name = "{index} with username={0} password={1}")
     public static Collection<Object[]> getCredentials() {
         return Arrays.asList(new Object[][]{
                 {"standard_user", "secret_sauce"},
