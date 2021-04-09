@@ -26,5 +26,36 @@ test {
     buildDir = "target"
     reporting.baseDir = "$projectDir/reports/gradle"
     testResultsDirName = "$projectDir/reports/gradle/test-results"
-    systemProperty "saucedemo.web.url", System.getProperty("saucedemo.web.url")
+    systemProperty "report.path", "$reporting.baseDir"
+    systemProperty "screenshots.path", "$reporting.baseDir/tests/screenshots"
+}
+
+def embedFiles() {
+    def files = []
+
+    def screenshotPath = "$reporting.baseDir/tests/screenshots"
+    def indexFile = "$projectDir/reports/gradle/tests/test/index.html"
+    def screenshots = new File(screenshotPath)
+    if (screenshots.directory == true) {
+        screenshots.eachFile() { file ->
+            files << file.getName()
+        }
+
+        def indexHTML = new File(indexFile)
+        def htmlText = indexHTML.text
+        files.each {
+            def (testMethodName, extension) = it.tokenize('.')
+            def withLink = testMethodName + "</a> <a href=\"../screenshots/" + testMethodName + ".jpg\" >Screenshot</a>"
+            htmlText = htmlText.replaceAll(testMethodName + "</a>", withLink)
+        }
+        indexHTML.write(htmlText)
+    }
+
+
+}
+
+gradle.buildFinished { buildResult ->
+    if (buildResult.failure != null) {
+        embedFiles()
+    }
 }
