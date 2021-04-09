@@ -12,6 +12,13 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.1'
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    testCompile('org.seleniumhq.selenium:selenium-java:3.141.59') {
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-android-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-iphone-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-safari-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-edge-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-ie-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-opera-driver'
+    }
 
 }
