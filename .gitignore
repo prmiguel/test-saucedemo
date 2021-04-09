@@ -28,3 +28,4 @@ saucedemo-selenium-page-factory/.gradle
 saucedemo-selenium-page-factory/.idea
 saucedemo-selenium-page-factory/build
 saucedemo-selenium-page-factory/reports
+saucedemo-selenium-page-factory/target/
