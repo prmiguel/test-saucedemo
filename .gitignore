@@ -27,3 +27,4 @@ hs_err_pid*
 saucedemo-selenium-page-factory/.gradle
 saucedemo-selenium-page-factory/.idea
 saucedemo-selenium-page-factory/build
+saucedemo-selenium-page-factory/reports
