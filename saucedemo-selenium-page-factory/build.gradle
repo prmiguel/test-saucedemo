@@ -1,0 +1,65 @@
+repositories {
+    mavenCentral()
+}
+
+group 'com.saucedemo.test'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.1'
+    testCompile('org.seleniumhq.selenium:selenium-java:3.141.59') {
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-android-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-iphone-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-safari-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-edge-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-ie-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-opera-driver'
+    }
+}
+
+test {
+    buildDir = "target"
+    reporting.baseDir = "$projectDir/reports/gradle"
+    testResultsDirName = "$projectDir/reports/gradle/test-results"
+    systemProperty "report.path", "$reporting.baseDir"
+    systemProperty "screenshots.path", "$reporting.baseDir/tests/screenshots"
+
+    systemProperty "saucedemo.web.url", System.getProperty("saucedemo.web.url")
+    systemProperty "browser.name", System.getProperty("browser.name")
+    systemProperty "browser.headless", System.getProperty("browser.headless")
+}
+
+def embedFiles() {
+    def files = []
+
+    def screenshotPath = "$reporting.baseDir/tests/screenshots"
+    def indexFile = "$projectDir/reports/gradle/tests/test/index.html"
+    def screenshots = new File(screenshotPath)
+    if (screenshots.directory == true) {
+        screenshots.eachFile() { file ->
+            files << file.getName()
+        }
+
+        def indexHTML = new File(indexFile)
+        def htmlText = indexHTML.text
+        files.each {
+            def (testMethodName, extension) = it.tokenize('.')
+            def withLink = testMethodName + "</a> <a href=\"../screenshots/" + testMethodName + ".jpg\" >Screenshot</a>"
+            htmlText = htmlText.replaceAll(testMethodName + "</a>", withLink)
+        }
+        indexHTML.write(htmlText)
+    }
+
+
+}
+
+gradle.buildFinished { buildResult ->
+    if (buildResult.failure != null) {
+        embedFiles()
+    }
+}
