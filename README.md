@@ -24,17 +24,26 @@ Install the following software:
 #### Command Line Test Execution
 Run all tests:
 ```sh
+cd saucedemo-selenium-page-factory
 ./gradlew clean test
 ```
 > You can also set the following parameters:
 > -Dsaucedemo.web.url="<your url>"
 > -Dbrowser.name="<chrome or firefox>"
 > -Dbrowser.headless="<true or false>"
+
 Default values:
 - saucedemo.web.url="https://www.saucedemo.com"
 - browser.name="chrome"
 - browser.headless="true"
 
+<img src="./img/execution.gif" width="500" height="400" />
+
+#### Docker Image Test Execution
+```sh
+cd saucedemo-selenium-page-factory
+docker run -it -p 4444:4444 --rm -v ${PWD}:/code prmiguel/selenium-standalone-chrome bash -c "cd /code; ./gradlew clean test"
+```
 
 ### Report
 Once the execution is clomplete, you can see the reports in `./reports` folder
